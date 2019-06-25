@@ -10,10 +10,10 @@
 
 <dl class="dl-horizontal">
   <dt>User:</dt>
-  <dd><%= @post.user %></dd>
+  <dd><%= @post.user.name %></dd>
 
   <dt>Name:</dt>
-  <dd><%= @post.name %></dd>
+  <dd><%= @post.status.name %></dd>
 
   <dt>Item:</dt>
   <dd><%= @post.item %></dd>
@@ -25,7 +25,7 @@
   <dd><%= @post.image %></dd>
 
   <dt>Category:</dt>
-  <dd><%= @post.category %></dd>
+  <dd><%= @post.category.name %></dd>
 
   <dt>Desc:</dt>
   <dd><%= @post.desc %></dd>

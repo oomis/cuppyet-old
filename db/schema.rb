@@ -10,13 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_25_133624) do
+ActiveRecord::Schema.define(version: 2019_06_25_160618) do
 
   create_table "announcements", force: :cascade do |t|
     t.datetime "published_at"
     t.string "announcement_type"
     t.string "name"
     t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.text "desc"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -54,14 +61,16 @@ ActiveRecord::Schema.define(version: 2019_06_25_133624) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "name"
+    t.integer "status_id"
     t.string "item"
     t.string "location"
     t.string "image"
-    t.string "category"
+    t.integer "category_id"
     t.text "desc"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_posts_on_category_id"
+    t.index ["status_id"], name: "index_posts_on_status_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -77,6 +86,13 @@ ActiveRecord::Schema.define(version: 2019_06_25_133624) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_services_on_user_id"
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "name"
+    t.text "desc"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -97,6 +113,8 @@ ActiveRecord::Schema.define(version: 2019_06_25_133624) do
 
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "posts", "categories"
+  add_foreign_key "posts", "statuses"
   add_foreign_key "posts", "users"
   add_foreign_key "services", "users"
 end

@@ -1,0 +1,43 @@
+
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <h1>Statuses</h1>
+  </div>
+
+  <div class="col-sm-6 text-right">
+  <%= link_to new_status_path, class: 'btn btn-primary' do %>
+    Add New Status
+  <% end %>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+    
+        <th>Name</th>
+    
+
+            <th>Desc</th>
+            
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @statuses.each do |status| %>
+        <%= content_tag :tr, id: dom_id(status), class: dom_class(status) do %>
+          
+            <td><%= link_to status.name, status %></td>
+          
+
+                      <td><%= status.desc %></td>
+          
+          
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

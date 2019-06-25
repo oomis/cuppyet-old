@@ -16,10 +16,14 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    @categories = Category.all.map{ |cat| [cat.name, cat.id] }
+    @statuses = Status.all.map{ |sta| [sta.name, sta.id] }
   end
 
   # GET /posts/1/edit
   def edit
+    @categories = Category.all.map { |cat| [cat.name, cat.id] }
+    @statuses = Status.all.map { |sta| [sta.name, sta.id] }
   end
 
   # POST /posts
@@ -27,6 +31,8 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
+    @post.category_id = params[:category_id]
+    @post.status_id = params[:status_id]
 
     respond_to do |format|
       if @post.save
@@ -42,6 +48,8 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    @post.category_id = params[:category_id]
+    @post.status_id = params[:status_id]
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -71,6 +79,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:user_id, :name, :item, :location, :image, :category, :desc)
+      params.require(:post).permit(:user_id, :status_id, :item, :location, :image, :category_id, :desc)
     end
 end

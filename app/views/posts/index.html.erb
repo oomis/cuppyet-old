@@ -36,14 +36,14 @@
       <% @posts.each do |post| %>
         <%= content_tag :tr, id: dom_id(post), class: dom_class(post) do %>
           
-            <td><%= link_to post.name, post %></td>
+            <td><%= link_to post.user.name, post %></td>
           
 
-                      <td><%= post.user.name %></td>
+                      <td><%= post.status.name%></td>
                       <td><%= post.item %></td>
                       <td><%= post.location %></td>
                       <td><%= post.image %></td>
-                      <td><%= post.category %></td>
+                      <td><%= post.category.name %></td>
                       <td><%= post.desc %></td>
                       <td><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></td>
           

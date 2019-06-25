@@ -1,0 +1,18 @@
+<div class="page-header">
+  <%= link_to statuses_path, class: 'btn btn-default' do %>
+    All Statuses
+  <% end %>
+  <%= link_to edit_status_path(@status), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show status</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @status.name %></dd>
+
+  <dt>Desc:</dt>
+  <dd><%= @status.desc %></dd>
+
+</dl>

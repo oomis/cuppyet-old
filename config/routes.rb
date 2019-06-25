@@ -2,6 +2,8 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   
+  resources :statuses
+  resources :categories
   namespace :admin do
       resources :users
       resources :posts
