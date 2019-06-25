@@ -1,8 +1,10 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  
   namespace :admin do
       resources :users
+      resources :posts
 
       root to: "users#index"
     end
@@ -16,6 +18,13 @@ Rails.application.routes.draw do
   resources :notifications, only: [:index]
   resources :announcements, only: [:index]
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
-  root to: 'home#index'
+  
+  resources :posts
+
+  resources :posts do
+    resources :likes
+  end
+
+  root to: 'posts#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
