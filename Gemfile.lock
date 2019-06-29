@@ -13,7 +13,7 @@ GIT
 
 GIT
   remote: https://github.com/thoughtbot/administrate.git
-  revision: 133d1cf98795df938224f50248f10df45ca482c5
+  revision: c629f8fb4f3634e06b77b83021b1725fa121cab4
   specs:
     administrate (0.11.0)
       actionpack (>= 4.2)
@@ -100,7 +100,7 @@ GEM
       sassc-rails (>= 2.0.0)
     builder (3.2.3)
     byebug (11.0.1)
-    capybara (3.24.0)
+    capybara (3.25.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -108,6 +108,13 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
+    carrierwave (2.0.0.rc)
+      activemodel (>= 5.0.0)
+      activesupport (>= 5.0.0)
+      addressable (~> 2.6)
+      image_processing (~> 1.1)
+      mimemagic (>= 0.3.0)
+      mini_mime (>= 0.1.3)
     childprocess (1.0.1)
       rake (< 13.0)
     chronic (0.10.2)
@@ -139,6 +146,9 @@ GEM
     hashie (3.6.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    image_processing (1.9.0)
+      mini_magick (>= 4.9.3, < 5)
+      ruby-vips (>= 2.0.13, < 3)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     jquery-rails (4.3.5)
@@ -212,7 +222,7 @@ GEM
       rack
     orm_adapter (0.5.0)
     popper_js (1.14.5)
-    public_suffix (3.1.0)
+    public_suffix (3.1.1)
     puma (3.12.1)
     rack (2.0.7)
     rack-protection (2.0.5)
@@ -256,6 +266,8 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    ruby-vips (2.0.14)
+      ffi (~> 1.9)
     ruby_dep (1.5.0)
     rubyzip (1.2.3)
     sass (3.7.4)
@@ -342,6 +354,7 @@ DEPENDENCIES
   bootstrap (~> 4.3, >= 4.3.1)
   byebug
   capybara (>= 2.15)
+  carrierwave (>= 2.0.0.rc, < 3.0)
   devise (~> 4.6, >= 4.6.1)
   devise-bootstrapped!
   devise_masquerade (~> 0.6.2)

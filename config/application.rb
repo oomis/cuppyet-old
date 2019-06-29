@@ -23,3 +23,6 @@ module Myapp
     # the framework and any gems in your application.
   end
 end
+
+require 'carrierwave'
+require 'carrierwave/orm/activerecord'

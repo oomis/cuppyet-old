@@ -22,13 +22,15 @@
   <dd><%= @post.location %></dd>
 
   <dt>Image:</dt>
-  <dd><%= @post.image %></dd>
+  <dd><%#= image_tag (@post.image.url.to_s) %></dd>
 
   <dt>Category:</dt>
   <dd><%= @post.category.name %></dd>
 
   <dt>Desc:</dt>
   <dd><%= @post.desc %></dd>
+
+  <%= render 'disqus' %>
 
 
   <% if !(user_signed_in?) %>

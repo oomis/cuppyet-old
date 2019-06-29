@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
       root to: "users#index"
     end
+  
+  get '/home', to: 'home#index'
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
     authenticate :user, lambda { |u| u.admin? } do
@@ -25,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :likes
+    resources :comments, only: [:create,:index, :destroy]
   end
 
   root to: 'posts#index'

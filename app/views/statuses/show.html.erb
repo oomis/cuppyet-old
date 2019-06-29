@@ -16,3 +16,47 @@
   <dd><%= @status.desc %></dd>
 
 </dl>
+
+  
+
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+    
+        <th>Name</th>
+    
+
+            <th>User</th>
+            <th>Item</th>
+            <th>Location</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Desc</th>
+            <th>likes</th>
+            
+      </tr>
+    </thead>
+
+    <% Post.where(status: @status.id).each do |post| %>
+    <tbody>
+
+            <td><%= link_to post.user.name, post %></td>
+          
+
+                      <td><%= post.status.name%></td>
+                      <td><%= post.item %></td>
+                      <td><%= post.location %></td>
+                      <td><%= post.image %></td>
+                      <td><%= post.category.name %></td>
+                      <td><%= post.desc %></td>
+                      <td><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></td>
+          
+          
+
+
+    </tbody>
+    <% end %>
+  </table>
+</div>
