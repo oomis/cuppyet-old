@@ -1,52 +1,298 @@
-<div class="page-header">
-  <%= link_to posts_path, class: 'btn btn-default' do %>
+<section class="product-details">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-6 py-3 order-2 order-lg-1">
+            <div data-slider-id="1" class="owl-carousel owl-theme owl-dots-modern detail-full">
+              <%= image_tag (@post.image.url.to_s) %>
+              <div style="background: center center url('<%= @post.image.url.to_s %>') no-repeat; background-size: cover;" class="detail-full-item">     </div>
+              <div style="background: center center url('lm.jpg') no-repeat; background-size: cover;" class="detail-full-item">     </div>
+            </div>
+          </div>
+          <div class="d-flex align-items-center col-lg-6 col-xl-5 pl-lg-5 mb-5 order-1 order-lg-2">
+            <div>
+              <ul class="breadcrumb justify-content-start">
+                <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
+                <li class="breadcrumb-item"><%= link_to @post.category.name, categories_path %></li>
+                <li class="breadcrumb-item active"><%= link_to @post.item, posts_path %></li>
+              </ul>
+              <h1 class="mb-4"><%= @post.item %></h1>
+              <h6 class="mb-4"><%= @post.status.name %></h6>
+              <!--<p class="mb-4 text-muted"><%#= @post.desc %></p>-->
+              <form action="#">
+                <div class="row">
+                  <div class="col-sm-6 col-lg-12 detail-option mb-3">
+                    <h6 class="detail-option-heading">Location</h6>
+                    <label for="size_0" class="btn btn-sm btn-outline-secondary detail-option-btn-label">
+                      <%= @post.location %>
+                    </label>
+                  </div>
+                  <div class="col-sm-6 col-lg-12 detail-option mb-3">
+                    <h6 class="detail-option-heading">Category</h6>
+                    <label for="material_0" class="btn btn-sm btn-outline-secondary detail-option-btn-label">   
+                      <%= @post.category.name %>
+                    </label>
+                  </div>
+                </div>
+                <ul class="list-inline">
+                  <li class="list-inline-item">
+                  <%= link_to edit_post_path(@post), class: 'btn btn-dark btn-lg mb-1' do %>
+                    Edit
+                  <% end %>
+                  </li>
+                  <li class="list-inline-item"><a href="#" class="btn btn-outline-secondary mb-1"> <i class="far fa-heart mr-2"></i>Add to wishlist</a></li>
+                  
+                  <p><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+                  
+                </ul>
+              </form>
+                <% if !(user_signed_in?) %>
+
+                <% else %>
+                <% pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
+                
+
+                <% if pre_like %>
+                  <%= button_to raw('Unlike'), post_like_path(@post, pre_like), method: :delete %>
+                <% else %>
+                  <%= button_to 'Like', post_likes_path(@post), method: :post %>
+                <% end %>
+                
+                <% end %>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="mt-5">
+      <div class="container">
+        <ul role="tablist" class="nav nav-tabs flex-column flex-sm-row">
+          <li class="nav-item"><a data-toggle="tab" href="#description" role="tab" class="nav-link detail-nav-link active">Description</a></li>
+          <li class="nav-item"><a data-toggle="tab" href="#additional-information" role="tab" class="nav-link detail-nav-link">Additional Information</a></li>
+          <li class="nav-item"><a data-toggle="tab" href="#reviews" role="tab" class="nav-link detail-nav-link">Reviews</a></li>
+        </ul>
+        <div class="tab-content py-4">
+          <div id="description" role="tabpanel" class="tab-pane active px-3">
+            <p class="text-muted"><%= @post.desc %></p>
+          </div>
+          <div id="additional-information" role="tabpanel" class="tab-pane">
+            <div class="row">
+              <div class="col-lg-6">
+                <table class="table text-sm">
+                  <tbody>
+                    <tr>
+                      <th class="text-uppercase font-weight-normal border-0">Product #</th>
+                      <td class="text-muted border-0">Lorem ipsum dolor sit amet</td>
+                    </tr>
+                    <tr>
+                      <th class="text-uppercase font-weight-normal ">Available packaging</th>
+                      <td class="text-muted ">LOLDuis aute irure dolor in reprehenderit</td>
+                    </tr>
+                    <tr>
+                      <th class="text-uppercase font-weight-normal ">Weight</th>
+                      <td class="text-muted ">dolor sit amet</td>
+                    </tr>
+                    <tr>
+                      <th class="text-uppercase font-weight-normal ">Sunt in culpa qui</th>
+                      <td class="text-muted ">Lorem ipsum dolor sit amet</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-lg-6">
+                <table class="table text-sm">
+                  <tbody>
+                    <tr>
+                      <th class="text-uppercase font-weight-normal border-0">Weight</th>
+                      <td class="text-muted border-0">dolor sit amet                                </td>
+                    </tr>
+                    <tr>
+                      <th class="text-uppercase font-weight-normal ">Sunt in culpa qui</th>
+                      <td class="text-muted ">Lorem ipsum dolor sit amet                                </td>
+                    </tr>
+                    <tr>
+                      <th class="text-uppercase font-weight-normal ">Product #</th>
+                      <td class="text-muted ">Lorem ipsum dolor sit amet                                </td>
+                    </tr>
+                    <tr>
+                      <th class="text-uppercase font-weight-normal ">Available packaging</th>
+                      <td class="text-muted ">LOLDuis aute irure dolor in reprehenderit                                </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id="reviews" role="tabpanel" class="tab-pane">
+            <div class="row mb-5">
+              <div class="col-lg-10 col-xl-9">
+                <div class="media review">
+                  <div class="text-center mr-4 mr-xl-5"><img src="https://d19m59y37dris4.cloudfront.net/sell/1-2-5/img/person-1.378c2035.jpg" alt="Han Solo" class="review-image"><span class="text-uppercase text-muted">Dec 2018</span></div>
+                  <div class="media-body">
+                    <h5 class="mt-2 mb-1">Han Solo</h5>
+                    <div class="mb-2"><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i>
+                    </div>
+                    <p class="text-muted">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections     </p>
+                  </div>
+                </div>
+                <div class="media review">
+                  <div class="text-center mr-4 mr-xl-5"><img src="https://d19m59y37dris4.cloudfront.net/sell/1-2-5/img/person-2.cc2fa49a.jpg" alt="Luke Skywalker" class="review-image"><span class="text-uppercase text-muted">Dec 2018</span></div>
+                  <div class="media-body">
+                    <h5 class="mt-2 mb-1">Luke Skywalker</h5>
+                    <div class="mb-2"><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-gray-200"></i>
+                    </div>
+                    <p class="text-muted">The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. &quot;What's happened to me?&quot; he thought. It wasn't a dream.     </p>
+                  </div>
+                </div>
+                <div class="media review">
+                  <div class="text-center mr-4 mr-xl-5"><img src="https://d19m59y37dris4.cloudfront.net/sell/1-2-5/img/person-3.28271a04.jpg" alt="Princess Leia" class="review-image"><span class="text-uppercase text-muted">Dec 2018</span></div>
+                  <div class="media-body">
+                    <h5 class="mt-2 mb-1">Princess Leia</h5>
+                    <div class="mb-2"><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-gray-200"></i><i class="fa fa-xs fa-star text-gray-200"></i>
+                    </div>
+                    <p class="text-muted">His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table.     </p>
+                  </div>
+                </div>
+                <div class="media review">
+                  <div class="text-center mr-4 mr-xl-5"><img src="https://d19m59y37dris4.cloudfront.net/sell/1-2-5/img/person-4.0a8b43db.jpg" alt="Jabba Hut" class="review-image"><span class="text-uppercase text-muted">Dec 2018</span></div>
+                  <div class="media-body">
+                    <h5 class="mt-2 mb-1">Jabba Hut</h5>
+                    <div class="mb-2"><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i><i class="fa fa-xs fa-star text-warning"></i>
+                    </div>
+                    <p class="text-muted">Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.     </p>
+                  </div>
+                </div>
+                <div class="py-5 px-3">
+                  <h5 class="text-uppercase mb-4">Leave a review</h5>
+                  <form id="contact-form" method="post" action="contact.php" class="form">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label for="name" class="form-label">Your name *</label>
+                          <input type="text" name="name" id="name" placeholder="Enter your name" required="required" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label for="rating" class="form-label">Your rating *</label>
+                          <select name="rating" id="rating" class="custom-select focus-shadow-0">
+                            <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5/5)</option>
+                            <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4/5)</option>
+                            <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3/5)</option>
+                            <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2/5)</option>
+                            <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1/5)</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="email" class="form-label">Your email *</label>
+                      <input type="email" name="email" id="email" placeholder="Enter your  email" required="required" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="review" class="form-label">Review text *</label>
+                      <textarea rows="4" name="review" id="review" placeholder="Enter your review" required="required" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-outline-dark">Post review</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer-->
+    <footer class="main-footer">
+      <!-- Services block-->
+      <!--<div class="bg-gray-100 text-dark-700 py-6">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 service-column">
+              <svg class="svg-icon service-icon">
+                <use xlink:href="#delivery-time-1"> </use>
+              </svg>
+              <div class="service-text">
+                <h6 class="text-uppercase">Free shipping &amp; return</h6>
+                <p class="text-muted font-weight-light text-sm mb-0">Free Shipping over $300</p>
+              </div>
+            </div>
+            <div class="col-lg-4 service-column">
+              <svg class="svg-icon service-icon">
+                <use xlink:href="#money-1"> </use>
+              </svg>
+              <div class="service-text">
+                <h6 class="text-uppercase">Money back guarantee</h6>
+                <p class="text-muted font-weight-light text-sm mb-0">30 Days Money Back Guarantee</p>
+              </div>
+            </div>
+            <div class="col-lg-4 service-column">
+              <svg class="svg-icon service-icon">
+                <use xlink:href="#customer-support-1"> </use>
+              </svg>
+              <div class="service-text">
+                <h6 class="text-uppercase">020-800-456-747</h6>
+                <p class="text-muted font-weight-light text-sm mb-0">24/7 Available Support</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      -->
+
+
+
+
+
+<!--<div class="page-header">
+  <%#= link_to posts_path, class: 'btn btn-default' do %>
     All Posts
-  <% end %>
-  <%= link_to edit_post_path(@post), class: 'btn btn-primary' do %>
+  <%# end %>
+  <%#= link_to edit_post_path(@post), class: 'btn btn-primary' do %>
     Edit
-  <% end %>
+  <%# end %>
   <h1>Show post</h1>
 </div>
 
 <dl class="dl-horizontal">
   <dt>User:</dt>
-  <dd><%= @post.user.name %></dd>
+  <dd><%#= @post.user.name %></dd>
 
   <dt>Name:</dt>
-  <dd><%= @post.status.name %></dd>
+  <dd><%#= @post.status.name %></dd>
 
   <dt>Item:</dt>
-  <dd><%= @post.item %></dd>
+  <dd><%#= @post.item %></dd>
 
   <dt>Location:</dt>
-  <dd><%= @post.location %></dd>
+  <dd><%#= @post.location %></dd>
 
   <dt>Image:</dt>
   <dd><%#= image_tag (@post.image.url.to_s) %></dd>
 
   <dt>Category:</dt>
-  <dd><%= @post.category.name %></dd>
+  <dd><%#= @post.category.name %></dd>
 
   <dt>Desc:</dt>
-  <dd><%= @post.desc %></dd>
+  <dd><%#= @post.desc %></dd>
 
-  <%= render 'disqus' %>
+  <%#= render 'disqus' %>
 
 
-  <% if !(user_signed_in?) %>
+  <%# if !(user_signed_in?) %>
 
-  <% else %>
-  <% pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
+  <%# else %>
+  <%# pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
   
 
-  <% if pre_like %>
-    <%= button_to 'Unlike', post_like_path(@post, pre_like), method: :delete %>
-  <% else %>
-    <%= button_to 'Like', post_likes_path(@post), method: :post %>
-  <% end %>
+  <%# if pre_like %>
+    <%#= button_to 'Unlike', post_like_path(@post, pre_like), method: :delete %>
+  <%# else %>
+    <%#= button_to 'Like', post_likes_path(@post), method: :post %>
+  <%# end %>
   
-  <% end %>
+  <%# end %>
 
-  <p><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+  <p><%#= @post.likes.count %> <%#= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
 
-</dl>
+</dl>-->

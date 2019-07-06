@@ -1,3 +1,33 @@
+<div class="container">
+	<div class="row">
+    <% Post.where(status: @status.id).each do |post| %>
+				<div class="col-sm-3">
+					<div class="card">
+						<%= image_tag (post.image.url.to_s), class: "card-img-top" %>
+						<%= link_to Status.find(post.status.id).name, status_path(post.status.id), class: "btn btn-outline-danger"%>
+						<div class="card-body">
+							<h5><%=link_to post.item, post, class: "card-title"%></h5>
+							<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+							<%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%>
+							<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+						</div>
+					</div>
+				</div>
+		<% end %>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="page-header">
   <%= link_to statuses_path, class: 'btn btn-default' do %>
     All Statuses
