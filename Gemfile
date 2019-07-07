@@ -32,7 +32,7 @@ gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
 
 
 group :development do
-  gem 'sqlite3'
+  gem 'sqlite3', '~> 1.4'
 end
 group :production do
   gem 'pg'
