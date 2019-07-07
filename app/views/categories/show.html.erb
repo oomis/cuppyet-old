@@ -1,3 +1,58 @@
+<div class="position-relative overflow-hidden p-3 p-md-5 text-center bg-light">
+  <div class="col-md-8 p-lg-8 mx-auto my-8">
+      <h1 class="display-4 font-weight-normal"><%= @category.name %></h1>
+      <p class="lead font-weight-normal"><%= @category.desc %></p>
+      <!--<a class="btn btn-outline-secondary" href="#">Coming soon</a>-->
+  </div>
+  <!--<div class="product-device shadow-sm d-none d-md-block"></div>
+  <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>-->
+</div>
+
+<%#= image_tag (@category.image.url.to_s) %>
+
+
+
+
+
+<div class="container">
+	<div class="row">
+    <% Post.where(category: @category.id).each do |post| %>
+				<div class="col-sm-3">
+					<div class="card">
+						<%= image_tag (post.image.url.to_s), class: "card-img-top" %>
+						<%= link_to Status.find(post.status.id).name, status_path(post.status.id), class: "btn btn-outline-danger"%>
+						<div class="card-body">
+							<h5><%=link_to post.item, post, class: "card-title"%></h5>
+							<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+							<%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%>
+							<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+						</div>
+					</div>
+				</div>
+		<% end %>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="page-header">
   <%= link_to categories_path, class: 'btn btn-default' do %>
     All Categories

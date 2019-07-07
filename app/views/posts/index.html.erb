@@ -78,7 +78,7 @@
 						<%= link_to Status.find(post.status.id).name, status_path(post.status.id), class: "btn btn-outline-danger"%>
 						<div class="card-body">
 							<h5><%=link_to post.item, post, class: "card-title"%></h5>
-							<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+							<p class="card-text"><%= post.desc.truncate(40) %></p>
 							<%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%>
 							<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
 						</div>

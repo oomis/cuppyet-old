@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_25_160618) do
+ActiveRecord::Schema.define(version: 2019_07_06_095602) do
 
   create_table "announcements", force: :cascade do |t|
     t.datetime "published_at"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2019_06_25_160618) do
     t.text "desc"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
